@@ -23,3 +23,6 @@ git remote add origin 你的仓库名
 	给你的远程仓库名改成别名；
 git push -u origin master;
 	将本地仓库推送到远程端
+
+git pull
+拉取远端的代码直接到工作区
