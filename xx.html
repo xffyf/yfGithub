@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>练习</title>
+    <script src="https://cdn.bootcss.com/vue/2.5.16/vue.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            li{
+                list-style-type: none;
+            }
+            .wrap{
+                width: 210px;
+                height: 500px;
+                border: 1px solid #ddd;
+                margin: 50px auto;
+                position: relative;
+                overflow: hidden;
+            }
+            .wrap .btn ul li{
+                width: 70px;
+                box-sizing: border-box;
+                border-right: 1px solid #ddd;
+                float: left;
+                height: 100px;
+                text-align: center;
+                line-height: 100px;
+            }
+            .wrap .btn ul li.active{
+                background: #b6b6b6;
+                color: #fff;
+            }
+            .wrap .btn ul li:last-child{
+                border-right: none;
+            }
+            .wrap .show ul li{
+                width: 210px;
+                height: 0;
+                position: absolute;
+                font-size: 100px;
+                color: #fff;
+                text-align: center;
+                top: 100px;
+                line-height: 400px;
+                transition: all 1s;
+                opacity: 0;
+                left: -100px;
+                position: absolute;
+            }   
+    
+            .wrap .show ul li.active{
+                opacity: 1;
+                height: 400px;
+                left: 0;
+                transform:rotate(360deg);
+            }
+            
+        </style>
+</head>
+<body>
+        <div class="wrap">
+                
+                        <div class="btn" >
+                            <ul id="btn">
+                                <li class="active">按钮1</li>
+                                <li>按钮2</li>
+                                <li>按钮3</li>
+                            </ul>
+                        </div>
+                        <div class="show">
+                            <ul>
+                                <li style="background: burlywood;" class="active">1</li>
+                                <li style="background: pink;">2</li>
+                                <li style="background: rgb(71, 48, 52);">3</li>
+                            </ul>
+                        </div>
+                    </div>
+</body>
+<script>
+
+function Tab(){
+
+    }
+    Tab.prototype.init = function(btnS,showS){
+        //筹备好所有需要用的属性
+        this.btn = document.querySelectorAll(btnS);
+        this.show = document.querySelectorAll(showS);
+        this.index = 0;
+
+        if(this.btn.length==0 || this.btn==null||this.show.length==0||this.show==null){
+            return 0;
+        }else{
+            this.handleEvent();
+        }
+    }
+    Tab.prototype.handleEvent = function(){
+        for(let i = 0; i < this.btn.length ; i++){
+            this.btn[i].onmouseover = function(){
+                this.changeIndex(i);
+                this.changeItem();
+            }.bind(this)
+        }
+    }
+    Tab.prototype.changeIndex = function(index){
+        this.index = index;
+    }
+    Tab.prototype.changeItem = function(){
+        for(var i = 0; i < this.btn.length ; i++){
+            this.btn[i].className = "";
+            this.show[i].className = "";                       
+        }
+        this.btn[this.index].className = "active";
+        this.show[this.index].className = "active";
+        
+    }
+    var tab = new Tab();
+    tab.init("#btn li",".show li");
+       
+
+        
+
+
+
+
+
+</script>
+</html>
